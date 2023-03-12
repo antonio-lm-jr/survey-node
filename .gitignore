@@ -1,0 +1,10 @@
+.idea/
+node_modules/
+build/
+dist
+tmp/
+temp/
+coverage/
+*.env
+.env.*
+!.env.example
