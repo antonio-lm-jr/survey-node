@@ -8,9 +8,13 @@ import { Either, left, right } from '../../shared/either';
 import { IUseCase } from '../../shared/useCaseInterface';
 import { SurveyInputDTO, SurveyOutputDTO } from '../dto/surveyDTO';
 import { IIdentifier } from '../ports/identifierInterface';
+import { ISurveyRepository } from '../ports/surveyRepoInterface';
 
 export class CreateSurveyUseCase implements IUseCase {
-  constructor(private identifier: IIdentifier) {}
+  constructor(
+    private identifier: IIdentifier,
+    private repository: ISurveyRepository
+  ) {}
 
   private getOptionsFromDTO(
     input: SurveyInputDTO
@@ -77,7 +81,7 @@ export class CreateSurveyUseCase implements IUseCase {
 
     const surveyValue = surveyOrErr.value as Survey;
 
-    // TODO: Salve mongo
+    this.repository.create(surveyValue);
 
     return right({
       reference: surveyValue.reference,
