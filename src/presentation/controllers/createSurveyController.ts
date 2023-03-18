@@ -19,6 +19,7 @@ export class CreateSurveyController {
 
       return created(useCaseResult);
     } catch (error) {
+      console.log(error);
       return serverError((error as Error).message);
     }
   }
